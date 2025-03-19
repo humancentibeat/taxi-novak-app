@@ -1,0 +1,91 @@
+<!-- Schedule Table -->
+<div class="px-5">
+    {% for group_name, group_drivers in grouped_drivers.items() %}
+        <div class="mb-8">
+            <!-- Group Header -->
+            <h3 class="text-xl font-bold text-gold-500 mb-3">{{ group_name }}</h3>
+
+            <!-- Button Row -->
+            <div class="flex gap-4 mb-4">
+                <!-- Clear Week Button -->
+                <button type="button" id="clearWeekButton" class="btn btn-danger">Alles Löschen</button>
+
+                <!-- Wochentransfer Button -->
+                <button id="openCopyModal" class="btn-joysome">Wochentransfer</button>
+
+                <!-- Week Navigation -->
+                <div class="flex gap-2 flex-grow justify-end">
+                    <!-- Left Arrow (⇦) -->
+                    <a href="{{ url_for('dashboard', week=week - 1) }}" class="btn-joysome flex items-center justify-center text-2xl font-bold">
+                        ⇦
+                    </a>
+
+                    <!-- Current Week (Heute) -->
+                    <a href="{{ url_for('dashboard', week=0) }}" class="btn-joysome flex items-center justify-center text-2xl font-bold">
+                        Heute
+                    </a>
+
+                    <!-- Right Arrow (⇨) -->
+                    <a href="{{ url_for('dashboard', week=week + 1) }}" class="btn-joysome flex items-center justify-center text-2xl font-bold">
+                        ⇨
+                    </a>
+                </div>
+            </div>
+
+            <!-- Schedule Table -->
+            <div class="responsive-table">
+                <table class="w-full bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+                    <thead>
+                        <tr>
+                            <th class="bg-gold-500 text-black p-3 font-bold uppercase">Fahrer</th>
+                            {% set short_days = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'] %}
+                            {% for day in current_week %}
+                                <th class="bg-gold-500 text-black p-3 font-bold uppercase">
+                                    {{ short_days[loop.index0] }} <br> 
+                                    ({% set formatted_date = day.date[:10] %} 
+                                    {{ formatted_date[8:10] ~ '.' ~ formatted_date[5:7] }})
+                                </th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for driver in group_drivers %}
+                        <tr class="highlight-row {% if driver.username == current_user.username %}highlight-driver{% endif %}">
+                            <td class="p-3 font-bold">{{ driver.username }}</td>
+                            {% for day in current_week %}
+                                {% set entry = entries | selectattr("user_id", "equalto", driver._id_str) | selectattr("date", "equalto", day.date) | first %}
+                                <td class="p-4 text-center cursor-pointer transition-all duration-200 group relative
+                                    {% if entry and entry.type %}
+                                        {% if entry.type == 'Arbeit' %}bg-arbeit hover:bg-arbeit
+                                        {% elif entry.type == 'Krank' %}bg-krank hover:bg-krank
+                                        {% elif entry.type == 'Urlaub' %}bg-urlaub hover:bg-urlaub
+                                        {% endif %}
+                                    {% endif %}"
+                                    data-user-id="{{ driver._id_str }}"
+                                    data-date="{{ day.date }}"
+                                    data-entry-id="{{ entry._id_str if entry else '' }}"
+                                    data-type="{{ entry.type if entry else '' }}"
+                                    data-time-from="{{ entry.time_from if entry and entry.time_from else '08:00' }}"
+                                    data-time-to="{{ entry.time_to if entry and entry.time_to else '16:00' }}">
+                                    <div class="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity pointer-events-none
+                                        {% if entry and entry.type %}
+                                            {% if entry.type == 'Arbeit' %}bg-arbeit
+                                            {% elif entry.type == 'Krank' %}bg-krank
+                                            {% elif entry.type == 'Urlaub' %}bg-urlaub
+                                            {% endif %}
+                                        {% endif %}"></div>
+                                    {% if entry and entry.type == 'Arbeit' and entry.time_from and entry.time_to %}
+                                        {{ entry.time_from }} - {{ entry.time_to }}  <!-- Display times for Arbeit -->
+                                    {% else %}
+                                        {{ entry.type if entry and entry.type else "frei" }}  <!-- Default display -->
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endfor %}
+</div>

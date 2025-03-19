@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="full-height bg-gray-900">
+        <!-- Look what is here for you waiting to be used: 🖐️💛 -->
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Taxi Novak Logo" class="img-logo mb-6">
+        <h1 class="text-4xl font-bold text-gold-500">401 - Nicht autorisiert! 🔐</h1>
+        <p class="text-xl mt-4 text-gray-300">Du brauchst einen Schlüssel für diese Tür.. 🚖</p>
+        <p class="mt-2 text-gray-400">Aber keine Sorge, wir bringen dich sicher zurück!</p>
+        
+        <!-- Joysome High-Five Section -->
+        <div class="mt-6 text-center">
+            <p class="text-xl text-gold-500">Hier, ein virtueller High-Five für dich: 🖐️💛</p>
+            <p class="text-gray-400">Weil du es verdient hast!</p>
+        </div>
+
+        <!-- Back to Dashboard Button -->
+        <a href="{{ url_for('dashboard') }}" class="mt-6 inline-block btn-gold py-2 px-4 rounded hover:bg-gold-600">
+            Zurück zum Dienstplan
+        </a>
+    </div>
+{% endblock %}

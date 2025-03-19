@@ -1,0 +1,31 @@
+<!-- Copy Week Modal -->
+<div id="copyWeekModal" class="modal">
+    <div class="modal-content bg-gray-800 p-6 rounded-lg max-w-md mx-auto mt-20 border-2 border-gold-500">
+        <span class="close">&times;</span>
+        
+                <!-- Logo -->
+                 <div class="title-div-class">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Taxi Novak Logo" class="w-12 h-12 mr-4">
+        <h3>Übertragen</h3></div>
+        <form id="copyForm" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div>
+                <label for="copyScope">Kopieren:</label> <!-- Add a label for the select -->
+                <select id="copyScope" name="copy_scope" aria-label="Select copy scope"> <!-- Add aria-label -->
+                    <option value="last_week">Von letzter Woche übernehmen</option>
+                    <option value="next_week">Auf nächste Woche übertragen</option>
+                </select>
+            </div>
+            <div>
+                <label for="driverSelect">Fahrer:</label> <!-- Add a label for the select -->
+                <select id="driverSelect" name="driver_id" aria-label="Select driver"> <!-- Add aria-label -->
+                    <option value="all">Alle Fahrer</option>
+                    {% for driver in processed_drivers %}
+                        <option value="{{ driver._id_str }}">{{ driver.username }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn-joysome">Ausführen</button>
+        </form>
+    </div>
+</div>

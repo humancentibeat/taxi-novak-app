@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 class="text-xl font-bold mb-5">Schedule Management</h2>
+
+    <!-- Entries Table -->
+    <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+        <table class="w-full">
+            <thead>
+                <tr class="bg-gold-500 text-black">
+                    <th class="p-3">tets</th>
+                    <th class="p-3">Date</th>
+                    <th class="p-3">Type</th>
+                    <th class="p-3">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in entries %}
+                    <tr class="bg-gray-700 text-white">
+                        <td class="p-3">{{ entry.user_id }}</td>
+                        <td class="p-3">{{ entry.date_from }} to {{ entry.date_to }}</td>
+                        <td class="p-3">{{ entry.type }}</td>
+                        <td class="p-3">
+                            <a href="{{ url_for('admin_edit_schedule', entry_id=entry._id) }}" class="bg-blue-500 text-white font-bold py-1 px-3 rounded hover:bg-blue-600">Edit</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

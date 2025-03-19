@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Taxi Novak</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+</head>
+<body class="bg-gray-900 flex items-center justify-center min-h-screen">
+    <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md border-2 border-gold-500">
+        <!-- Logo and Title -->
+        <div class="flex items-center justify-center mb-6">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Taxi Novak Logo" class="w-12 h-12 mr-4">
+            <h1 class="text-2xl font-bold text-gold-500">Taxi Novak Dienstplan</h1>
+        </div>
+        <!-- Login Form -->
+        <form method="POST" action="{{ url_for('login') }}" aria-labelledby="login-form-heading">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            
+            <div class="mb-4">
+                <label for="username" class="block text-sm font-medium text-gold-500">Benutzername</label>
+                <input type="text" id="username" name="username" required autocomplete="username"
+                       class="mt-1 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-900 text-white focus:ring-gold-500 focus:border-gold-500">
+            </div>
+
+            <div class="mb-6 relative">
+                <label for="password" class="block text-sm font-medium text-gold-500">Passwort</label>
+                <div class="relative">
+                    <input type="password" id="password" name="password" required autocomplete="current-password"
+                           class="mt-1 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-900 text-white focus:ring-gold-500 focus:border-gold-500">
+                    <!-- Eye icon -->
+                    <span class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer" onclick="togglePasswordVisibility()">
+                        <svg id="eye-icon" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 12s3-6 10-6 10 6 10 6-3 6-10 6-10-6-10-6z" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-joysome w-full btn-gold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gold-500 transition-colors">
+                Login
+            </button>
+        </form>
+    </div>
+    <!-- Wrong Login Notification Modal -->
+    <div id="wrongLoginNotification" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+        <div class="modal-content bg-gray-800 p-6 rounded-lg max-w-md mx-auto mt-20 border-2 border-gold-500">
+            <!-- Notification Header -->
+            <h3 class="text-xl font-bold text-gold-500 mb-4 flex items-center gap-2">
+                Login fehlgeschlagen
+                <img src="{{ url_for('static', filename='img/favicon.ico') }}" alt="Taxi Novak Logo" class="w-6 h-6">
+            </h3>
+            <!-- Notification Message -->
+            <p class="text-gray-300">Falscher Benutzername oder Passwort. Bitte versuchen Sie es erneut.</p>
+            <!-- Confirm Button -->
+            <div class="flex justify-end mt-6">
+                <button id="confirmWrongLogin" class="bg-gold-500 text-gray-900 font-bold py-2 px-4 rounded hover:bg-gold-600 transition-colors">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- JavaScript for Toggling Password Visibility -->
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eye-icon');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />`;
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 12s3-6 10-6 10 6 10 6-3 6-10 6-10-6-10-6z" />`;
+            }
+        }
+        // Function to show the wrong login notification
+        function showWrongLoginNotification() {
+            const notification = document.getElementById('wrongLoginNotification');
+            const loginForm = document.querySelector('.bg-gray-800'); // Target the login form
+            notification.classList.remove('hidden');
+        
+            // Add shake animation to the login form
+            loginForm.classList.add('shake-animation');
+            setTimeout(() => {
+                loginForm.classList.remove('shake-animation');
+            }, 500); // Remove the class after the animation ends
+        }
+        
+
+        // Function to hide the wrong login notification
+        function hideWrongLoginNotification() {
+            const notification = document.getElementById('wrongLoginNotification');
+            notification.classList.add('hidden');
+        }
+
+        // Attach event listener to the OK button
+        document.getElementById('confirmWrongLogin').addEventListener('click', hideWrongLoginNotification);
+
+        // Example: Call this function when login fails (you'll integrate this with your backend logic)
+        // showWrongLoginNotification();
+    </script>
+    {% if login_failed %}
+    <script>
+        showWrongLoginNotification();
+    </script>
+{% endif %}
+</body>
+</html>

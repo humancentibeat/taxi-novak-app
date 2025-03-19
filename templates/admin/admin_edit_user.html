@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container mx-auto px-6">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h2 class="text-4xl font-bold text-gradient">User Management</h2>
+        </header>
+
+        <!-- Form Section -->
+        <form method="POST" action="{{ url_for('admin_edit_user', user_id=user._id) }}" class="max-w-4xl mx-auto p-6 bg-white shadow-xl rounded-xl mb-8">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+            <!-- Username Field -->
+            <div class="mb-6">
+                <label for="username" class="text-lg font-semibold text-gold-500">Username</label>
+                <input type="text" id="username" name="username" value="{{ user.username }}" required
+                       class="mt-2 block w-full px-6 py-4 border border-gray-300 rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition duration-300 ease-in-out transform hover:scale-105">
+            </div>
+
+            <!-- Role Field -->
+            <div class="mb-6">
+                <label for="role" class="text-lg font-semibold text-gold-500">Role</label>
+                <select id="role" name="role" required
+                        class="mt-2 block w-full px-6 py-4 border border-gray-300 rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition duration-300 ease-in-out transform hover:scale-105">
+                    <option value="admin" {% if user.role == 'admin' %}selected{% endif %}>Admin</option>
+                    <option value="manager_all" {% if user.role == 'manager_all' %}selected{% endif %}>Manager (All)</option>
+                    <option value="manager_group" {% if user.role == 'manager_group' %}selected{% endif %}>Manager (Group)</option>
+                    <option value="driver" {% if user.role == 'driver' %}selected{% endif %}>Driver</option>
+                </select>
+            </div>
+
+            <!-- Group Field -->
+            <div class="mb-6">
+                <label for="group" class="text-lg font-semibold text-gold-500">Group</label>
+                <input type="text" id="group" name="group" value="{{ user.group or '' }}"
+                       class="mt-2 block w-full px-6 py-4 border border-gray-300 rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition duration-300 ease-in-out transform hover:scale-105">
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex justify-center gap-10 mt-8">
+                <button type="submit" class="btn-joysome bg-gradient-to-r from-gold-500 to-gold-600 text-white font-bold py-4 px-10 rounded-xl shadow-xl hover:bg-gradient-to-l hover:scale-105 transition-all ease-in-out duration-300">
+                    Update User
+                </button>
+                <a href="{{ url_for('admin_users') }}" class="btn-royal bg-gray-700 text-white font-bold py-4 px-10 rounded-xl shadow-xl hover:bg-gray-800 hover:scale-105 transition-all ease-in-out duration-300">
+                    Cancel
+                </a>
+            </div>
+        </form>
+
+        <!-- Table Section (Assuming it's below the form) -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white shadow-lg rounded-xl mb-8">
+                <thead>
+                    <tr class="bg-gray-100 text-lg font-semibold text-gray-700">
+                        <th class="py-3 px-6 text-left">User</th>
+                        <th class="py-3 px-6 text-left">Role</th>
+                        <th class="py-3 px-6 text-left">Group</th>
+                        <th class="py-3 px-6 text-left">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table rows here -->
+                    <tr class="border-t">
+                        <td class="py-4 px-6">User 1</td>
+                        <td class="py-4 px-6">Admin</td>
+                        <td class="py-4 px-6">Group A</td>
+                        <td class="py-4 px-6"><button class="btn-joysome bg-gradient-to-r from-gold-500 to-gold-600 text-white py-2 px-6 rounded-xl shadow-xl">Edit</button></td>
+                    </tr>
+                    <!-- More rows here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

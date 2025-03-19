@@ -1,0 +1,887 @@
+/* custom.css */
+
+/* ======================= */
+/*       Custom Colors     */
+/* ======================= */
+:root {
+  --gold-500: #FFD700; /* Classic gold */
+  --gold-600: #d4b000; /* Darker gold for hover states */
+  --gray-900: #111827; /* Dark gray for backgrounds */
+  --gray-800: #1f2937; /* Slightly lighter gray */
+  --gray-300: #d1d5db; /* Light gray for text */
+  --gray-400: #9ca3af; /* Slightly darker gray for text */
+  --red-500: #ef4444;  /* Red for delete buttons */
+  --red-600: #dc2626;  /* Darker red for hover states */
+  --blue-500: #3b82f6; /* Blue for edit buttons */
+  --blue-600: #2563eb; /* Darker blue for hover states */
+}
+
+/* ======================= */
+/*       Text Colors       */
+/* ======================= */
+.text-gold-500 { color: var(--gold-500); }
+.text-gold-600 { color: var(--gold-600); }
+.text-white { color: white; }
+.text-gray-300 { color: var(--gray-300); }
+.text-gray-400 { color: var(--gray-400); }
+
+/* ======================= */
+/*       Background Colors */
+/* ======================= */
+.bg-gold-500 { background-color: var(--gold-500); }
+.bg-gold-600 { background-color: var(--gold-600); }
+.bg-gray-900 { background-color: var(--gray-900); }
+.bg-gray-800 { background-color: var(--gray-800); }
+.bg-red-500 { background-color: var(--red-500); }
+.bg-red-600 { background-color: var(--red-600); }
+.bg-blue-500 { background-color: var(--blue-500); }
+.bg-blue-600 { background-color: var(--blue-600); }
+
+/* ======================= */
+/*       Hover States      */
+/* ======================= */
+.hover\:bg-gold-600:hover { background-color: var(--gold-600); }
+.hover\:bg-red-600:hover { background-color: var(--red-600); }
+.hover\:bg-blue-600:hover { background-color: var(--blue-600); }
+.hover\:bg-gray-600:hover { background-color: #4b5563; } /* Custom gray for hover */
+
+/* ======================= */
+/*       Buttons           */
+/* ======================= */
+.btn-gold {
+  background-color: var(--gold-500);
+  color: black;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-gold:hover {
+  background-color: var(--gold-600);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(255, 215, 0, 0.3), 0 2px 4px -1px rgba(255, 215, 0, 0.2);
+}
+
+/* ======================= */
+/*       Inputs            */
+/* ======================= */
+.input-gold:focus {
+  border-color: var(--gold-500);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+}
+
+/* ======================= */
+/*       Animations        */
+/* ======================= */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.skeleton {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  background-color: #374151; /* gray-700 */
+  border-radius: 0.5rem;
+}
+
+/* Ring Colors (for focus states) */
+.ring-gold-500 { --tw-ring-color: var(--gold-500); }
+
+/* ======================= */
+/*       Gradients         */
+/* ======================= */
+.bg-gold-gradient {
+  background: linear-gradient(45deg, var(--gold-500) 0%, var(--gold-600) 100%);
+}
+
+/* ======================= */
+/*       Animations        */
+/* ======================= */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.skeleton {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  background-color: #374151; /* gray-700 */
+  border-radius: 0.5rem;
+}
+
+/* ======================= */
+/*       Image Styling     */
+/* ======================= */
+.img-logo {
+  width: 200px; /* Set the width */
+  height: auto; /* Maintain aspect ratio */
+  margin: 0 auto; /* Center the logo horizontally */
+}
+
+/* ======================= */
+/*       Custom Utilities  */
+/* ======================= */
+.custom-shadow {
+  box-shadow: 0 4px 6px -1px rgba(255, 215, 0, 0.1), 0 2px 4px -1px rgba(255, 215, 0, 0.06);
+}
+/* Flexbox Utilities */
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.min-h-screen {
+  min-height: 100vh;
+}
+/* Full Height Container */
+.full-height {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* General Input Styling */
+input[type="date"],
+input[type="time"],
+select {
+    width: 100%;
+    background-color: #1a1a1a; /* Dark background */
+    color: white; /* White text */
+    border: 1px solid #444; /* Subtle border */
+    padding: 0.75rem; /* Comfortable padding */
+    border-radius: 0.375rem; /* Rounded corners */
+    cursor: pointer; /* Make entire field clickable */
+    appearance: none; /* Remove default styles */
+}
+
+/* Shake Animation for Invalid Inputs */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+  75% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
+}
+
+.shake-animation {
+  animation: shake 0.5s ease-in-out;
+}
+/* Ensure the entire input field is clickable */
+input[type="date"],
+input[type="time"] {
+    position: relative;
+    padding-right: 2rem; /* Space for icon */
+}
+
+/* Invert picker icons to white */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0; /* Make default icon invisible while keeping functionality */
+}
+
+/* Hidden Class */
+.hidden {
+  display: none !important;
+}
+
+/* Warning Notification Styles */
+#warningNotification {
+  animation: slideIn 0.3s ease-out;
+}
+
+.title-div-class {
+  display: flex;
+  justify-content: flex-start; /* Align items to the left */
+  align-items: center;
+  gap: 10px; /* Adjust spacing between text and logo */
+}
+
+@keyframes slideIn {
+  from {
+      transform: translateX(100%);
+      opacity: 0;
+  }
+  to {
+      transform: translateX(0);
+      opacity: 1;
+  }
+}
+
+/* Table Responsive Styles */
+.responsive-table {
+  display: grid;
+  grid-template-columns: repeat(8, 0.8fr); /* 8 equal columns */
+  width: 100vw; /* Ensures table fills full screen width */
+  overflow: hiddden; /* Prevents horizontal scrolling */
+  border-radius: 10px; /* Remove default table borders */
+}
+
+/* Table Header and Data Cells */
+.responsive-table th,
+.responsive-table td {
+  min-width: 12vw; /* Ensures 8 columns fit evenly (100vw / 8) + some nice margin */
+  text-align: center;
+  padding: 2px;
+  white-space: nowrap; /* Prevents text from wrapping */
+}
+
+/* Sticky header */
+.responsive-table thead {
+  position: sticky;
+  top: 0;
+  background-color: var(--gold-500);
+  z-index: 1;
+}
+
+/* Highlight row on hover */
+.responsive-table tr,
+.responsive-table td:hover {
+  background-color: #18170f6d; /* Light yellow for hover effect */
+  transition: background-color 0.98s ease;
+  overflow: hidden;
+  border-radius: 22px; /* Rounded corners */
+}
+
+/* Highlight entire row on hover */
+.table-row-div:hover td {
+  background-color: #64603e36; /* Subtle dark effect */
+  transition: background-color 0.2s ease;
+  border-radius: 18px; /* Rounded corners */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .responsive-table {
+    font-size: 10px;
+  }
+  .responsive-table th,
+  .responsive-table td {
+    padding: 2px;
+    min-width: 12vw; /* Keeps cells proportional */
+  }
+}
+
+
+/* Modal Container */
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center; /* Vertically center the modal */
+  justify-content: center; /* Horizontally center the modal */
+  overflow-y: auto; /* Allow scrolling if content is too tall */
+  z-index: 50; /* Ensure it's above other elements */
+}
+
+/* Modal Content */
+.modal-content {
+  max-height: 95vh; /* Limit height to 90% of the viewport */
+  min-width: 60vw; /* Minimum width of 90% of the viewport */
+  overflow-y: auto; /* Allow scrolling inside the modal */
+  margin: 20px; /* Add some margin for smaller screens */
+}
+
+/* ======================= */
+/*       Overrides         */
+/* ======================= */
+
+button.bg-gold-500 {
+  transition: all 0.2s ease-in-out;
+}
+
+button.bg-gold-500:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(255, 215, 0, 0.3), 0 2px 4px -1px rgba(255, 215, 0, 0.2);
+}
+
+/* ======================= */
+/*       Golden Styles     */
+/* ======================= */
+:root {
+  --gold-500: #FFD700; /* Classic gold */
+  --gold-600: #d4b000; /* Darker gold for hover states */
+}
+
+/* Golden Gradient with Shine */
+.bg-gold-gradient {
+  background: linear-gradient(45deg, var(--gold-500) 0%, var(--gold-600) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-gold-gradient::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shimmer 2s infinite linear;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Golden Text with Glow */
+.text-gold-500 { 
+  color: var(--gold-500); 
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+}
+
+.text-gold-600 { 
+  color: var(--gold-600); 
+  text-shadow: 0 0 8px rgba(212, 177, 0, 0.541);
+}
+
+/* Golden Buttons with Pulse Effect */
+.btn-gold {
+  background-color: var(--gold-500);
+  color: black;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 8px rgba(148, 139, 44, 0.6);
+}
+
+.btn-gold:hover {
+  background-color: var(--gold-600);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.7), 0 0 15px rgba(255, 215, 0, 0.5);
+  animation: pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.7); }
+  100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.9); }
+}
+
+/* Golden Input Focus with Glow */
+.input-gold:focus {
+  border-color: var(--gold-500);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Custom Gold Admin Elements */
+.bg-gold-500 {
+  background-color: var(--gold-500);
+}
+
+.hover\:bg-gold-600:hover {
+  background-color: var(--gold-600);
+}
+
+.bg-gray-700 {
+  background-color: #374151;
+}
+
+.hover\:bg-gray-600:hover {
+  background-color: #4b5563;
+}
+
+/* Smooth Hover Transitions */
+.transition-colors {
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Add JOYSOME */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(67, 54, 11, 0.374);
+}
+
+.modal-content {
+  background: rgba(255, 255, 255, 0.1); /* Slightly transparent */
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  margin: 15% auto;
+  padding: 20px;
+  width: 50%;
+  border-radius: 10px;
+}
+
+.close {
+  float: right;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+/* =========================== */
+/*      Joysome GOLD Magic     */
+/* =========================== */
+.btn-joysome {
+  background: linear-gradient(45deg, #ffcc00, #ffdd33);
+  color: black;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 10px rgba(255, 204, 0, 0.4);
+}
+
+/* Medium screens (tablets) */
+@media (max-width: 768px) {
+  .btn-joysome {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Small screens (phones) */
+@media (max-width: 480px) {
+  .btn-joysome {
+    padding: 2px 4px;
+    font-size: 0.6rem;
+    border-radius: 6px;
+  }
+}
+
+/* Glowing Effect */
+.btn-joysome::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 10%, transparent 70%);
+  opacity: 0;
+  transform: scale(1);
+  transition: opacity 0.3s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/* Sparkle Animation */
+.btn-joysome::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 10%, transparent 50%);
+  opacity: 0;
+  opacity: calc(clamp(0.5, 1, 0.5) + 0.5);  /* Dynamic opacity */
+  transform: translate(-50%, -50%) scale(1);
+  transition: opacity 0.2s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/* Hover Magic */
+.btn-joysome:hover {
+  background: linear-gradient(45deg, #ffdd33, #ffe680);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(255, 204, 0, 0.6);
+}
+
+/* Activate Glows & Sparkles */
+.btn-joysome:hover::before {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.btn-joysome:hover::after {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.3);
+}
+
+ /* Distortion Wave Effect */
+@keyframes distort {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-1px) scale(1.02); }
+  100% { transform: translateY(0); }
+} 
+
+.btn-joysome:hover {
+  animation: distort 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 6px 12px rgba(255, 204, 0, 0.6); }
+  100% { box-shadow: 0 8px 16px rgba(255, 204, 0, 0.8); }
+}
+
+/* Responsiveness: Adjust for smaller screens */
+@media (max-width: 768px) {
+  .btn-joysome {
+    padding: 2px 4px;
+    font-size: 0.8rem;
+    box-shadow: 0 4px 8px rgba(255, 204, 0, 0.4);
+  }
+
+  /* Adjust the glowing effect size */
+  .btn-joysome::before {
+    width: 150%;
+    height: 150%;
+  }
+
+  .btn-joysome::after {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Further responsiveness for very small screens */
+@media (max-width: 480px) {
+  .btn-joysome {
+    padding: 1px 2px;
+    font-size: 0.6rem;
+    box-shadow: 0 3px 6px rgba(255, 204, 0, 0.3);
+  }
+
+  /* Adjust the glowing effect size */
+  .btn-joysome::before {
+    width: 120%;
+    height: 120%;
+  }
+
+  .btn-joysome::after {
+    width: 80%;
+    height: 80%;
+  }
+}
+
+/* =========================== */
+/*        Ruby Magic Button     */
+/* =========================== */
+
+:root {
+  --ruby-red: #e11d48; /* Intense ruby red */
+  --ruby-dark: #9b1c36; /* Darker ruby for hover */
+}
+
+/* Ruby Gradient */
+.bg-ruby-gradient {
+  background: linear-gradient(45deg, var(--ruby-red) 0%, var(--ruby-dark) 100%);
+}
+
+/* Ruby Text */
+.text-ruby { color: var(--ruby-red); }
+
+/* Ruby Buttons */
+.btn-ruby {
+  background: var(--ruby-red);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 10px rgba(229, 29, 72, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ruby Hover Effects */
+.btn-ruby:hover {
+  background: var(--ruby-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(229, 29, 72, 0.6);
+}
+
+
+/* Sparkle Effect for Ruby */
+.btn-ruby::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 10%, transparent 70%);
+  opacity: 0;
+  transform: scale(1);
+  transition: opacity 0.3s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/* Sparkle on Hover */
+.btn-ruby:hover::before {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* Distortion for Ruby */
+@keyframes distort-ruby {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-1px) scale(1.05); }
+  100% { transform: translateY(0); }
+}
+
+/* Distortion Wave for Ruby */
+.btn-ruby:hover {
+  animation: distort-ruby 0.6s ease-in-out infinite alternate;
+}
+
+/* Responsiveness: Adjust for smaller screens */
+@media (max-width: 768px) {
+  .btn-ruby {
+    padding: 2px 4px;
+    font-size: 0.8rem;
+    box-shadow: 0 4px 8px rgba(255, 204, 0, 0.4);
+  }
+
+  /* Adjust the glowing effect size */
+  .btn-ruby::before {
+    width: 150%;
+    height: 150%;
+  }
+
+  .btn-ruby::after {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Further responsiveness for very small screens */
+@media (max-width: 480px) {
+  .btn-ruby {
+    padding: 1px 2px;
+    font-size: 0.6rem;
+    box-shadow: 0 3px 6px rgba(255, 204, 0, 0.3);
+  }
+
+  /* Adjust the glowing effect size */
+  .btn-buby::before {
+    width: 120%;
+    height: 120%;
+  }
+
+  .btn-ruby::after {
+    width: 80%;
+    height: 80%;
+  }
+}
+
+/* =========================== */
+/*        Royal Sapphire       */
+/* =========================== */
+
+:root {
+  --royal-blue: #3b5b8c; /* Deeper, more royal blue */
+  --royal-dark: #2a4578; /* Darker blue for hover */
+  --mystic-purple: #6a4e9f; /* Mystic purple for added depth */
+}
+
+/* Royal Gradient with Mystic Glow */
+.bg-royal-gradient {
+  background: linear-gradient(45deg, var(--royal-blue) 0%, var(--mystic-purple) 100%);
+}
+
+/* Royal Text */
+.text-royal { color: var(--royal-blue); }
+
+/* Royal Buttons with Frosted Effect */
+.btn-royal {
+  background: var(--royal-blue);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 6px 14px rgba(59, 91, 140, 0.4), 0 4px 6px rgba(106, 78, 159, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover Effects with Mystic Depth */
+.btn-royal:hover {
+  background: var(--royal-dark);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(59, 91, 140, 0.6), 0 6px 10px rgba(106, 78, 159, 0.4);
+}
+
+/* Mystic Glow Sparkle */
+.btn-royal::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 10%, transparent 70%);
+  opacity: 0;
+  transform: scale(1);
+  transition: opacity 0.3s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/* Sparkle on Hover */
+.btn-royal:hover::before {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* Subtle Distortion Animation */
+@keyframes distort-royal {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-2px) scale(1.05); }
+  100% { transform: translateY(0); }
+}
+
+/* Distortion Wave for Royal Vibe */
+.btn-royal:hover {
+  animation: distort-royal 0.6s ease-in-out infinite alternate;
+}
+
+/* Responsiveness: Adjust for smaller screens */
+@media (max-width: 768px) {
+  .btn-royal {
+    padding: 2px 4px;
+    font-size: 0.8rem;
+    box-shadow: 0 4px 8px rgba(255, 204, 0, 0.4);
+  }
+
+  /* Adjust the glowing effect size */
+  .btn-royal::before {
+    width: 150%;
+    height: 150%;
+  }
+
+  .btn-royal::after {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Further responsiveness for very small screens */
+@media (max-width: 480px) {
+  .btn-royal {
+    padding: 1px 2px;
+    font-size: 0.6rem;
+    box-shadow: 0 3px 6px rgba(255, 204, 0, 0.3);
+  }
+
+  /* Adjust the glowing effect size */
+  .btn-royal::before {
+    width: 120%;
+    height: 120%;
+  }
+
+  .btn-royal::after {
+    width: 80%;
+    height: 80%;
+  }
+}
+
+/* =========================== */
+/*       Beautiful Hover       */
+/* =========================== */
+
+.highlight-row {
+  transition: all 0.6s ease-in-out; /* Smooth transition */
+}
+
+.highlight-row:hover {
+  color: red; /* Change text color */
+  background-color: #7b70209f; /* Light gold background */
+  transform: scale(1.015); /* More noticeable lift effect */
+  border-left: 4px solid var(--gold-500); /* Thicker golden left border */
+  box-shadow: 0 0 12px rgba(180, 200, 0, 0.2); /* Stronger glow */
+  transition: all 0.6s ease-in-out; /* Smooth transition */
+}
+
+.highlight-row td {
+  transition: all 0.6s ease-in-out;
+  color: red;
+}
+
+.highlight-row:hover td {
+  background-color: transparent;
+}
+
+/* ======================= */
+/*       Entry Colors      */
+/* ======================= */
+:root {
+  --arbeit-blue: #3b82f6; 
+  --krank-red: #ef4444;  
+  --urlaub-green: #10b981; 
+}
+
+.rounded-entry {
+  border-radius: 8px; /* High five */ 
+  box-shadow: inset 0 0 4px rgba(181, 137, 41, 0.297), 
+              0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle 3D effect */
+  transition: transform 0.6s ease, box-shadow 0.25s ease;
+}
+
+.rounded-entry:hover {
+  transform: translateY(-2px); /* Slight lift on hover */
+  /* box-shadow: inset 0 0 3px rgba(84, 73, 18, 0.475), 
+              0 2px 6px rgba(189, 175, 175, 0.3); /* More glow on hover */
+}
+
+/* Apply to existing entries */
+.bg-arbeit, .bg-krank, .bg-urlaub {
+  border-radius: 8px; /* Another high five haha */ 
+  box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.3), 
+              0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.6s ease, box-shadow 0.2s ease;
+}
+
+.bg-arbeit:hover, .bg-krank:hover, .bg-urlaub:hover {
+  transform: scale(1.01);
+  box-shadow: inset 0 0 6px rgba(31, 47, 87, 0.491), 
+              0 6px 12px rgba(0, 0, 0, 0.3);
+}
+/* Ensure background color of entries is not overridden */
+.highlight-driver td:not([class*="bg-"]) {
+  background-color: #64603e36; /* Subtle dark effect */
+}
+/* Arbeit (Blue) */
+.bg-arbeit { background-color: var(--arbeit-blue); }
+.text-arbeit { color: var(--arbeit-blue); }
+.hover\:bg-arbeit:hover { background-color: #2563eb; } /* Darker blue */
+
+/* Krank (Red) */
+.bg-krank { background-color: var(--krank-red); }
+.text-krank { color: var(--krank-red); }
+.hover\:bg-krank:hover { background-color: #dc2626; } 
+
+/* Urlaub (Green) */
+.bg-urlaub { background-color: var(--urlaub-green); }
+.text-urlaub { color: var(--urlaub-green); }
+.hover\:bg-urlaub:hover { background-color: #059669; }  
+
+/* Override background colors inside highlight-driver */
+.highlight-driver .bg-arbeit { background-color: var(--arbeit-blue) !important; }
+.highlight-driver .bg-krank { background-color: var(--krank-red) !important; }
+.highlight-driver .bg-urlaub { background-color: var(--urlaub-green) !important; }
+/* keep white text color */
+td:not(.highlight-driver) {
+  color: white !important;
+}
+.highlight-driver td, .highlight-driver tr {
+  color: rgb(222, 214, 58) !important;
+  height: 50px !important;
+}

@@ -1,0 +1,12 @@
+<!-- Week Navigation -->
+<div class="flex justify-center gap-2 mb-5">
+    <a href="{{ url_for('dashboard', week=week - 1) }}" class="btn-joysome">
+        Früher
+    </a>
+    <a href="{{ url_for('dashboard', week=0) }}" class="btn-joysome">
+        Aktuelle Woche
+    </a>
+    <a href="{{ url_for('dashboard', week=week + 1) }}" class="btn-joysome">
+        Später
+    </a>
+</div>

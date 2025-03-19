@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="text-3xl font-extrabold text-gold-500 mb-6">User Management</h1>
+    
+    <!-- Create New User Button with Joymental Feel -->
+    <a href="{{ url_for('create_user') }}" 
+       class="bg-gold-500 text-black p-3 rounded-lg hover:bg-gold-600 transition-all ease-in-out duration-300 font-semibold mb-6 inline-block">
+        Create New User
+    </a>
+
+    <!-- Users Table -->
+    <table class="w-full bg-gray-800 rounded-lg shadow-xl overflow-hidden">
+        <thead>
+            <tr>
+                <th class="bg-gold-500 text-black p-3 font-bold uppercase">Benutzer</th>
+                <th class="bg-gold-500 text-black p-3 font-bold uppercase">Zuteilung</th>
+                <th class="bg-gold-500 text-black p-3 font-bold uppercase">Gruppe</th>
+                <th class="bg-gold-500 text-black p-3 font-bold uppercase">Aktionen</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr class="hover:bg-gray-750 transition-all ease-in-out duration-300">
+                    <td class="p-3 text-white">{{ user.username }}</td>
+                    <td class="p-3 text-white">{{ user.role }}</td>
+                    <td class="p-3 text-white">{{ user.group if user.group else '-' }}</td>
+                    <td class="p-3">
+                        <!-- Edit Action -->
+                        <a href="#" 
+                           class="text-gold-500 hover:text-gold-600 transition-all duration-200 inline-block mr-3 font-semibold py-2 px-4 rounded-lg hover:scale-105 ease-in-out">
+                            Bearbeiten
+                        </a>
+
+                        <!-- Delete Action with Confirmation -->
+                        <form action="#" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                            <button type="submit" class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-all duration-300 font-semibold">
+                                Löschen
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

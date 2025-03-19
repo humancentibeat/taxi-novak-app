@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Entry - Fleet Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+</head>
+<body class="bg-gray-900 text-gold-500 min-h-screen p-8">
+    <div class="max-w-2xl mx-auto">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-2xl font-bold">Eintrag bearbeiten</h1>
+            <a href="{{ url_for('dashboard') }}" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">
+                Zurück zum Dashboard
+            </a>
+        </div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="mb-4 p-4 rounded-lg {% if category == 'error' %}bg-red-800 text-red-100{% else %}bg-green-800 text-green-100{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Edit Form -->
+        <form method="POST" class="bg-gray-800 p-6 rounded-lg shadow-xl">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Date Fields -->
+                <div>
+                    <label for="date_from" class="block text-sm font-medium mb-2">Startdatum</label>
+                    <input type="date" id="date_from" name="date_from" 
+                           value="{{ entry.date_from.strftime('%Y-%m-%d') }}"
+                           class="w-full bg-gray-700 text-white p-2 rounded border border-gray-600 focus:ring-2 focus:ring-gold-500">
+                </div>
+                
+                <div>
+                    <label for="date_to" class="block text-sm font-medium mb-2">Enddatum</label>
+                    <input type="date" id="date_to" name="date_to" 
+                           value="{{ entry.date_to.strftime('%Y-%m-%d') }}"
+                           class="w-full bg-gray-700 text-white p-2 rounded border border-gray-600 focus:ring-2 focus:ring-gold-500">
+                </div>
+
+                <!-- Type Selector -->
+                <div class="md:col-span-2">
+                    <label for="type" class="block text-sm font-medium mb-2">Eintragstyp</label>
+                    <select id="type" name="type" 
+                            class="w-full bg-gray-700 text-white p-2 rounded border border-gray-600 focus:ring-2 focus:ring-gold-500">
+                        <option value="Arbeit" {% if entry.type == 'Arbeit' %}selected{% endif %}>Arbeit</option>
+                        <option value="Krank" {% if entry.type == 'Krank' %}selected{% endif %}>Krank</option>
+                        <option value="Urlaub" {% if entry.type == 'Urlaub' %}selected{% endif %}>Urlaub</option>
+                    </select>
+                </div>
+
+                <!-- Time Fields (Conditional) -->
+                <div id="timeFields" class="md:col-span-2 {% if entry.type != 'Arbeit' %}hidden{% endif %}">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="time_from" class="block text-sm font-medium mb-2">Startzeit</label>
+                            <input type="time" id="time_from" name="time_from" 
+                                   value="{{ entry.time_from if entry.time_from else '' }}"
+                                   class="w-full bg-gray-700 text-white p-2 rounded border border-gray-600 focus:ring-2 focus:ring-gold-500">
+                        </div>
+                        
+                        <div>
+                            <label for="time_to" class="block text-sm font-medium mb-2">Endzeit</label>
+                            <input type="time" id="time_to" name="time_to" 
+                                   value="{{ entry.time_to if entry.time_to else '' }}"
+                                   class="w-full bg-gray-700 text-white p-2 rounded border border-gray-600 focus:ring-2 focus:ring-gold-500">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="mt-8 flex justify-end gap-4">
+                <button type="submit" class="bg-gold-500 text-black px-6 py-2 rounded font-bold hover:bg-gold-600">
+                    Speichern
+                </button>
+                <a href="{{ url_for('dashboard') }}" class="bg-gray-600 text-white px-6 py-2 rounded hover:bg-gray-700">
+                    Abbrechen
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Dynamic Time Fields -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const typeSelect = document.getElementById('type');
+            const timeFields = document.getElementById('timeFields');
+
+            typeSelect.addEventListener('change', function() {
+                timeFields.classList.toggle('hidden', this.value !== 'Arbeit');
+            });
+        });
+    </script>
+</body>
+</html>

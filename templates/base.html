@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxi Novak</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+</head>
+<body class="bg-gray-900 text-white">  <!-- Add dark background and white text -->
+    <nav class="bg-gray-800 p-4">
+        <a href="{{ url_for('dashboard') }}" class="text-gold-500 hover:text-gold-600">Dashboard</a>
+        {% if current_user %}
+            <span class="ml-4">Eingeloggt als {{ current_user.username }} ({{ current_user.role }})</span>
+            <a href="{{ url_for('logout') }}" class="ml-4 text-gold-500 hover:text-gold-600">Logout</a>
+        {% else %}
+            <a href="{{ url_for('login') }}" class="ml-4 text-gold-500 hover:text-gold-600">Login</a>
+        {% endif %}
+    </nav>
+    {% block content %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="flex items-center justify-center mb-6">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Taxi Novak Logo" class="w-12 h-12 mr-4 img-logo">
+        <h1 class="text-3xl font-extrabold text-gold-500 text-shadow-lg">Taxi Novak Backdoor</h1>
+    </div>
+
+    <h2 class="text-xl font-bold mb-5 text-gold-500">User Management</h2>
+
+    <!-- Create User Button -->
+    <a href="{{ url_for('admin_create_user') }}" class="btn-joysome bg-gold-500 text-black font-bold py-2 px-6 rounded-lg hover:bg-gold-600 mb-5 inline-block shadow-lg transition-all ease-in-out duration-300">
+        Create User
+    </a>
+
+    <!-- Users Table -->
+    <div class="bg-gray-800 rounded-lg shadow-2xl overflow-hidden w-full max-w-screen-xl mx-auto">
+        <table class="table-magic w-full table-auto">
+            <thead>
+                <tr class="bg-gradient-to-r from-gold-500 to-yellow-600 text-black">
+                    <th class="p-4 text-left font-bold uppercase">Username</th>
+                    <th class="p-4 text-left font-bold uppercase">Role</th>
+                    <th class="p-4 text-left font-bold uppercase">Group</th>
+                    <th class="p-4 text-left font-bold uppercase">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr class="bg-gray-700 text-white hover:bg-gray-600 transition-all ease-in-out duration-300">
+                        <td class="p-4">{{ user.username }}</td>
+                        <td class="p-4">{{ user.role }}</td>
+                        <td class="p-4">{{ user.group or 'N/A' }}</td>
+                        <td class="p-4 flex gap-3 items-center">
+                            <a href="{{ url_for('admin_edit_user', user_id=user._id) }}" class="btn-royal bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 transition-all ease-in-out duration-300">
+                                Edit
+                            </a>
+                            <form action="{{ url_for('admin_delete_user', user_id=user._id) }}" method="POST" class="inline-block">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <button type="submit" class="btn-ruby bg-red-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-600 transition-all ease-in-out duration-300">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

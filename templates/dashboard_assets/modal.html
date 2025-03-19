@@ -1,0 +1,67 @@
+<!-- Create/Edit Entry Modal -->
+<div id="createEntryModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+    <div class="modal-content bg-gray-800 p-6 rounded-lg max-w-md mx-auto mt-20 border-2 border-gold-500">
+        <div class ="title-div-class">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Taxi Novak Logo" class="w-12 h-12 mr-4">
+        <h3 class="text-xl font-bold text-gold-500 mb-4">
+            <span id="modalAction"></span> Schicht für <span id="modalDriverName"></span><p></p> <span id="modalDate"></span>
+        </h3></div>
+        <form method="POST" action="{{ url_for('create_entry') }}" id="entryForm">
+            <input type="hidden" name="week" id="week" value="{{ week }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="entry_id" id="modalEntryId">
+            <input type="hidden" name="user_id" id="modalUserId">
+
+            <!-- Date Fields -->
+            <div class="mb-4">
+                <label for="date_from" class="block text-sm font-medium text-gold-500">Datum von</label>
+                <input type="date" id="date_from" name="date_from" required
+                    class="mt-1 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-900 text-white focus:ring-gold-500 focus:border-gold-500">
+            </div>
+
+            <div class="mb-4">
+                <label for="date_to" class="block text-sm font-medium text-gold-500">Datum bis</label>
+                <input type="date" id="date_to" name="date_to" required>
+            </div>
+
+            <!-- Type Selector -->
+            <div class="mb-4">
+                <label for="type" class="block text-sm font-medium text-gold-500">Typ</label>
+                <select id="type" name="type" required
+                        class="mt-1 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-900 text-white focus:ring-gold-500 focus:border-gold-500">
+                    <option value="Arbeit">Arbeit</option>
+                    <option value="Krank">Krank</option>
+                    <option value="Urlaub">Urlaub</option>
+                </select>
+            </div>
+
+            <!-- Time Fields -->
+            <div id="timeFields" class="hidden">
+                <div class="mb-4">
+                    <label for="time_from" class="block text-sm font-medium text-gold-500">Zeit von</label>
+                    <input type="time" id="time_from" name="time_from"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-900 text-white focus:ring-gold-500 focus:border-gold-500">
+                </div>
+
+                <div class="mb-4">
+                    <label for="time_to" class="block text-sm font-medium text-gold-500">Zeit bis</label>
+                    <input type="time" id="time_to" name="time_to"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm bg-gray-900 text-white focus:ring-gold-500 focus:border-gold-500">
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="flex justify-end gap-4">
+                <button type="submit" class="btn-joysome bg-gold-500 text-black font-bold py-2 px-4 rounded hover:bg-gold-600 transition-colors">
+                    <span id="submitText">Erstellen</span>
+                </button>
+                <button type="button" id="closeModalButton" class="btn-royal bg-gray-600 text-white font-bold py-2 px-4 rounded hover:bg-gray-700 transition-colors">
+                    Abbrechen
+                </button>
+                <button type="button" id="deleteButton" class="btn-ruby bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition-colors hidden">
+                    Löschen
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

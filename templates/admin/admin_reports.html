@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 class="text-xl font-bold mb-5">Reports & Analytics</h2>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
+        <div class="bg-gray-800 p-5 rounded-lg shadow-lg">
+            <h3 class="text-lg font-bold">Total Shifts</h3>
+            <p class="text-2xl">{{ reports_data.total_shifts }}</p>
+        </div>
+        <div class="bg-gray-800 p-5 rounded-lg shadow-lg">
+            <h3 class="text-lg font-bold">Total Users</h3>
+            <p class="text-2xl">{{ reports_data.total_users }}</p>
+        </div>
+        <div class="bg-gray-800 p-5 rounded-lg shadow-lg">
+            <h3 class="text-lg font-bold">Shift Types</h3>
+            <ul>
+                {% for shift in reports_data.shift_types %}
+                    <li>{{ shift._id }}: {{ shift.count }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
