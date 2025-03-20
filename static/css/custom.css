@@ -885,3 +885,23 @@ td:not(.highlight-driver) {
   color: rgb(222, 214, 58) !important;
   height: 50px !important;
 }
+
+
+/* ======================= */
+/*       Custom Buttons    */
+/* ======================= */
+
+.button-class-important {
+  background-color: #1f6857;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 6px 14px rgba(255, 0, 0, 0.4), 0 4px 6px rgba(255, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}

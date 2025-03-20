@@ -8,6 +8,9 @@
     <!-- Custom CSS -->
     <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
     <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <meta name="theme-color" content="#000000">
 </head>
 <body class="bg-gray-900 flex items-center justify-center min-h-screen">
     <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md border-2 border-gold-500">
@@ -45,7 +48,15 @@
                 Login
             </button>
         </form>
+
+        <!-- Install App Button -->
+        <div id="installButtonContainer" class="mt-6 text-center hidden">
+            <button id="installButton" class="bg-gold-500 text-gray-900 font-bold py-2 px-4 rounded hover:bg-gold-600 transition-colors">
+                Install App
+            </button>
+        </div>
     </div>
+
     <!-- Wrong Login Notification Modal -->
     <div id="wrongLoginNotification" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
         <div class="modal-content bg-gray-800 p-6 rounded-lg max-w-md mx-auto mt-20 border-2 border-gold-500">
@@ -64,8 +75,10 @@
             </div>
         </div>
     </div>
-    <!-- JavaScript for Toggling Password Visibility -->
+
+    <!-- JavaScript for Toggling Password Visibility and Install Button -->
     <script>
+        // Toggle Password Visibility
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById('password');
             const eyeIcon = document.getElementById('eye-icon');
@@ -78,25 +91,52 @@
                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 12s3-6 10-6 10 6 10 6-3 6-10 6-10-6-10-6z" />`;
             }
         }
-        // Function to show the wrong login notification
+
+        // Show Wrong Login Notification
         function showWrongLoginNotification() {
             const notification = document.getElementById('wrongLoginNotification');
-            const loginForm = document.querySelector('.bg-gray-800'); // Target the login form
+            const loginForm = document.querySelector('.bg-gray-800');
             notification.classList.remove('hidden');
-        
-            // Add shake animation to the login form
             loginForm.classList.add('shake-animation');
             setTimeout(() => {
                 loginForm.classList.remove('shake-animation');
-            }, 500); // Remove the class after the animation ends
+            }, 500);
         }
-        
 
-        // Function to hide the wrong login notification
+        // Hide Wrong Login Notification
         function hideWrongLoginNotification() {
             const notification = document.getElementById('wrongLoginNotification');
             notification.classList.add('hidden');
         }
+
+        // Install App Button Logic
+        let deferredPrompt;
+        const installButtonContainer = document.getElementById('installButtonContainer');
+        const installButton = document.getElementById('installButton');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButtonContainer.style.display = 'block';
+
+            installButton.addEventListener('click', () => {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choice) => {
+                    if (choice.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    } else {
+                        console.log('User dismissed the install prompt');
+                    }
+                    deferredPrompt = null;
+                    installButtonContainer.style.display = 'none';
+                });
+            });
+        });
+
+        window.addEventListener('appinstalled', () => {
+            console.log('App installed');
+            installButtonContainer.style.display = 'none';
+        });
 
         // Attach event listener to the OK button
         document.getElementById('confirmWrongLogin').addEventListener('click', hideWrongLoginNotification);
@@ -108,6 +148,6 @@
     <script>
         showWrongLoginNotification();
     </script>
-{% endif %}
+    {% endif %}
 </body>
 </html>

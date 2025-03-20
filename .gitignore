@@ -68,4 +68,5 @@ testmongo.py
 themeGenerator.py
 
 # Exclude the backend folder
+site/python3.13/pygame/ 
 backend/
