@@ -232,7 +232,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 /* Table Header and Data Cells */
 .responsive-table th,
 .responsive-table td {
-  min-width: 12vw; /* Ensures 8 columns fit evenly (100vw / 8) + some nice margin */
+  min-width: 10vw; /* Ensures 8 columns fit evenly (100vw / 8) + some nice margin */
   text-align: center;
   padding: 2px;
   white-space: nowrap; /* Prevents text from wrapping */
@@ -258,7 +258,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 /* Highlight entire row on hover */
 .table-row-div:hover td {
   background-color: #64603e36; /* Subtle dark effect */
-  transition: background-color 0.2s ease;
+  transition: background-color 0.4s ease;
   border-radius: 18px; /* Rounded corners */
 }
 
@@ -270,7 +270,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   .responsive-table th,
   .responsive-table td {
     padding: 2px;
-    min-width: 12vw; /* Keeps cells proportional */
+    min-width: 10vw; /* Keeps cells proportional */
   }
 }
 
@@ -291,7 +291,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 
 /* Modal Content */
 .modal-content {
-  max-height: 98vh; /* Limit height to 90% of the viewport */
+  max-height: 92vh; /* Limit height to 90% of the viewport */
   min-width: 80vw; /* Minimum width of 90% of the viewport */
   overflow-y: auto; /* Allow scrolling inside the modal */
   margin: 10px; /* Add some margin for smaller screens */
