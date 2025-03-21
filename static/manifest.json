@@ -1,7 +1,7 @@
 {
-    "short_name": "GitEZ",
-    "name": "GitEZ - The Easy Way to Version Control",
-    "description": "A simple, frustration-free version control app.",
+    "short_name": "Taxi Novak",
+    "name": "TAXI NOVAK Dienstplan APP",
+    "description": "Taxi Novak Dienstplan APP",
     "icons": [
       {
         "src": "icons/icon-192x192.png",
@@ -15,8 +15,8 @@
       }
     ],
     "start_url": "/",
-    "background_color": "#ffffff",
+    "background_color": "#030303",
     "display": "standalone",
     "scope": "/",
-    "theme_color": "#000000"
+    "theme_color": "#f2f2f2"
   }
