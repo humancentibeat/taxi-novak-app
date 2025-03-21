@@ -232,6 +232,8 @@ def login():
 @jwt_required()
 def dashboard():
     current_user = json.loads(get_jwt_identity())
+    print("Current User:", current_user)  # Debugging
+    user_role = current_user['role']
     query = {}
 
     # Redirect admins to the admin panel
@@ -312,7 +314,7 @@ def dashboard():
         current_week=[{"day": (start_of_week + timedelta(days=i)).strftime("%A"), 
                       "date": (start_of_week + timedelta(days=i)).strftime("%Y-%m-%d")} 
                      for i in range(7)],
-        week=week, username=current_user.get("username", "Guest")
+        week=week, username=current_user.get("username", "Guest"), user_role=user_role
     )
 
 @app.route('/entries/create', methods=['POST'])

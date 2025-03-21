@@ -7,11 +7,15 @@
 
             <!-- Button Row -->
             <div class="flex gap-4 mb-4">
-                <!-- Clear Week Button -->
-                <button type="button" id="clearWeekButton" class="btn btn-danger">Alles Löschen</button>
+<!-- Clear Week Button -->
+{% if user_role == 'manager_all' %}
+    <button type="button" id="clearWeekButton" class="btn btn-danger">Alles Löschen</button>
+{% endif %}
 
-                <!-- Wochentransfer Button -->
-                <button id="openCopyModal" class="btn-joysome">Wochentransfer</button>
+<!-- Wochentransfer Button -->
+{% if user_role == 'manager_all' %}
+    <button id="openCopyModal" class="btn-joysome">Wochentransfer</button>
+{% endif %}
 
                 <!-- Week Navigation -->
                 <div class="flex gap-2 flex-grow justify-end">
