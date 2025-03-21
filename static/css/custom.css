@@ -232,7 +232,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 /* Table Header and Data Cells */
 .responsive-table th,
 .responsive-table td {
-  min-width: 10vw; /* Ensures 8 columns fit evenly (100vw / 8) + some nice margin */
+  min-width: 12vw; /* Ensures 8 columns fit evenly (100vw / 8) + some nice margin */
   text-align: center;
   padding: 2px;
   white-space: nowrap; /* Prevents text from wrapping */
@@ -270,7 +270,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   .responsive-table th,
   .responsive-table td {
     padding: 2px;
-    min-width: 10vw; /* Keeps cells proportional */
+    min-width: 12vw; /* Keeps cells proportional */
   }
 }
 
@@ -893,6 +893,7 @@ button.bg-gold-500:hover {
 /* keep white text color */
 td:not(.highlight-driver) {
   color: white !important;
+  max-width: 10vw;
 }
 .highlight-driver td, .highlight-driver tr {
   color: rgb(222, 214, 58) !important;
